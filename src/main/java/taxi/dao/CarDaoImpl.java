@@ -16,11 +16,11 @@ import taxi.model.Driver;
 import taxi.model.Manufacturer;
 import taxi.util.ConnectionUtil;
 
-
 @Dao
 public class CarDaoImpl implements CarDao {
     private static final int ZERO_PLACEHOLDER = 0;
     private static final int PARAMETER_SHIFT = 2;
+    public static final String DELIMETER = ", ?";
 
     @Override
     public Car create(Car car) {
@@ -188,7 +188,7 @@ public class CarDaoImpl implements CarDao {
         int size = exceptions.size();
         String insertQuery = "DELETE FROM cars_drivers WHERE car_id = ? "
                 + "AND NOT driver_id IN ("
-                + ZERO_PLACEHOLDER + ", ?".repeat(size)
+                + ZERO_PLACEHOLDER + DELIMETER.repeat(size)
                 + ");";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement preparedStatement =
