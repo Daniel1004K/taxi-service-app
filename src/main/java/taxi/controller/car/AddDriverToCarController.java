@@ -6,6 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import taxi.lib.Injector;
 import taxi.model.Car;
 import taxi.model.Driver;
@@ -14,6 +16,7 @@ import taxi.service.DriverService;
 
 @WebServlet(urlPatterns = "/cars/drivers/add")
 public class AddDriverToCarController extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(AddDriverToCarController.class);
     private static final Injector injector = Injector.getInstance("taxi");
     private final CarService carService = (CarService) injector
             .getInstance(CarService.class);
@@ -28,12 +31,13 @@ public class AddDriverToCarController extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws IOException, ServletException {
+            throws IOException {
         long driverId = Long.parseLong(req.getParameter("driver_id"));
         long carId = Long.parseLong(req.getParameter("car_id"));
         Driver driver = driverService.get(driverId);
         Car car = carService.get(carId);
         carService.addDriverToCar(driver, car);
         resp.sendRedirect("/cars/drivers/add");
+        logger.info("Driver by id = " + driverId + " was added to car by id = " + carId + ".");
     }
 }
