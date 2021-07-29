@@ -1,4 +1,4 @@
-#Taxi Service 
+# Taxi Service 
 This program is a taxi service, a database of cars, drivers.
 The program provides functionality: 
 - Create a new driver.
@@ -11,7 +11,7 @@ The program provides functionality:
   
 Allows access only to authorized drivers, also provides the ability to register new ones.
   
-This project follows the rules of N-tier Architecture and SOLID. Has DAO, SERVICE and CONTROLLER layers and uses custom Injector class and Logger.
+This project follows the rules of N-tier Architecture and SOLID. Has DAO, SERVICE and CONTROLLER layers and uses custom implementation of dependency injection principle by field and Logger.
   ## Architecture layers
 - **DAO** -  It communicates with the Database and handles the persisting of our data.
 - **Service**  - The program's business processed  here.
