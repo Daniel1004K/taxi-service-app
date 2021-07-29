@@ -20,7 +20,7 @@ public class DeleteCarController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        long id = Long.parseLong(req.getParameter("id"));
+        Long id = Long.parseLong(req.getParameter("id"));
         carService.delete(id);
         resp.sendRedirect("/cars/all");
         logger.info("Deleted car by id = " + id);

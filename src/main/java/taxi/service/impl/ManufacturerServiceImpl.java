@@ -1,10 +1,12 @@
-package taxi.service;
+package taxi.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import taxi.dao.ManufacturerDao;
 import taxi.lib.Inject;
 import taxi.lib.Service;
 import taxi.model.Manufacturer;
+import taxi.service.ManufacturerService;
 
 @Service
 public class ManufacturerServiceImpl implements ManufacturerService {
@@ -18,7 +20,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer get(Long id) {
-        return manufacturerDao.get(id).get();
+        return manufacturerDao.get(id).orElseThrow(() -> new NoSuchElementException("Manufacturer is not exist"));
     }
 
     @Override
