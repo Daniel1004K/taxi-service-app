@@ -21,7 +21,7 @@ import taxi.util.ConnectionUtil;
 public class CarDaoImpl implements CarDao {
     private static final int ZERO_PLACEHOLDER = 0;
     private static final int PARAMETER_SHIFT = 2;
-    public static final String DELIMETER = ", ?";
+    private static final String DELIMETER = ", ?";
 
     @Override
     public Car create(Car car) {
@@ -226,7 +226,7 @@ public class CarDaoImpl implements CarDao {
 
     private Driver parseDriverFromResultSet(ResultSet resultSet) throws SQLException {
         Long driverId = resultSet.getObject("id",Long.class);
-        String name = resultSet.getNString("name");
+        String name = resultSet.getString("name");
         String licenseNumber = resultSet.getNString("license_number");
         Driver driver = new Driver(name, licenseNumber);
         driver.setId(driverId);
@@ -239,7 +239,7 @@ public class CarDaoImpl implements CarDao {
         String manufacturerCountry = resultSet.getNString("manufacturer_country");
         Manufacturer manufacturer = new Manufacturer(manufacturerName, manufacturerCountry);
         manufacturer.setId(manufacturerId);
-        Long carId = resultSet.getLong("id");
+        Long carId = resultSet.getObject("id",Long.class);
         String model = resultSet.getNString("model");
         Car car = new Car(model, manufacturer);
         car.setId(carId);
