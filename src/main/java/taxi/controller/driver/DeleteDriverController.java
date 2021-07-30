@@ -20,7 +20,7 @@ public class DeleteDriverController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        long id = Long.parseLong(req.getParameter("id"));
+        Long id = Long.parseLong(req.getParameter("id"));
         driverService.delete(id);
         resp.sendRedirect("/drivers/all");
         logger.info("Deleted driver by id = " + id);

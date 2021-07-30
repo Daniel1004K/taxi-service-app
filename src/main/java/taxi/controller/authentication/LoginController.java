@@ -21,9 +21,9 @@ public class LoginController extends HttpServlet {
     private static final String PASSWORD = "password";
     private static final String DRIVER_ID = "driver_id";
     private static final String ERROR_MSG = "errorMsg";
+    private static final Logger logger = LogManager.getLogger(LoginController.class);
     private final AuthenticationService authenticationService =
             (AuthenticationService) injector.getInstance(AuthenticationService.class);
-    private static final Logger logger = LogManager.getLogger(LoginController.class);
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
